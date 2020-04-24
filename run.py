@@ -33,12 +33,14 @@ if __name__ == "__main__":
             except:
                 print("error in page: {}".format(l))
     elif ch == 2:
-        trade = input("Enter the type of business you want to search from werkenntdenbesten: ")
+        trade = input("Enter the type of business you want to search from werkenntdenbesten: (To search all just press enter)")
         page_start = input("Enter the page number you want to start searching from: (Press enter if you don't know what to enter)")
         page_end = input("Enter the last page number you want to get information: (Press enter if you don't know what to enter)")
         file_name = input("Enter the name of the file you want to save results as:  ")
         file_name = file_name + ".csv"
         tabulate_head(file_name, head_row)
+        if trade == '':
+            trade = 'trade'
         if page_start == '':
             page_start = 1
         if page_end == '':
