@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from htmls import getHTML
+from helper import *
 from time import sleep
 
 def search_links(term):

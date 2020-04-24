@@ -1,4 +1,4 @@
-from htmls import *
+from helper import *
 from bs4 import BeautifulSoup
 import json
 import requests
@@ -17,20 +17,6 @@ def list_cat(link): #returns the category links
         l['link_cat'].append(c['href'])
         print(c['href'])
     return l
-
-def json_save(dic, file):
-    f = open(file, 'w')
-    json.dump(dic, f)
-    f.close()
-
-def tabulate(csvFile, array):
-    with open(csvFile, 'a', newline='' ,encoding='utf-8') as f:
-        writer = csv.writer(f, delimiter=',')
-        for i in range(0, len(array)):
-            if len(array[i]) > 0:
-                writer.writerow(array[i])
-    return True
-
 
 def search_trade(trade,page,page_hash):
     links_hash = {}
@@ -57,7 +43,7 @@ def search_all_trade(trade,page_start, page_end):
         page = int(page_start)
         links = []
         page_hash = ""
-        while page < int(page_end):
+        while page <= int(page_end):
             links_hash = search_trade(trade,page,page_hash)
             time.sleep(1)
             page_hash = links_hash["hash"]
@@ -76,4 +62,5 @@ def get_website(url):
     soup = BeautifulSoup(html,'html.parser')
     website = soup.find("icon-list")
     website = str(website).split(",")[1][7:-1].replace("\\","")
+    print(website)
     return(website)
