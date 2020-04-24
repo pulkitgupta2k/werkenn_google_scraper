@@ -63,6 +63,6 @@ if __name__ == "__main__":
                 print(results_arr)
                 tabulate(file_name,results_arr)
             except:
-                print("error in page: {}".format(l))
+                print("error in page: {}".format(business_link))
     else:
         print("ex")
