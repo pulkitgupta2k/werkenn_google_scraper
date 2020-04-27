@@ -11,29 +11,31 @@ if __name__ == "__main__":
     print("2) Find websites from werkenntdenbesten: ")
     ch = int(input())
     if ch == 1:
-        word = input("Enter the keyword you want to search:  ")
-        results_number = input("Enter the number of resultss you want:  ")
+        words = input("Enter the keyword you want to search:  (For multiple keywords separate them by commas)")
+        words = words.split(",")
+        results_number = input("Enter the number of results you want:  ")
         file_name = input("Enter the name of the file you want to save results as:  ")
         file_name = file_name + ".csv"
         tabulate_head(file_name, head_row)
-        ls = search_links(word, results_number)
-        print("Searching complete. Checking for conditions.")
-        for l in ls:
-            try:
-                results = check(l)
-                # print(results)
-                results_arr = []
-                results_arr.append(results["link"])
-                results_arr.append(results["is_wp"])
-                results_arr.append(results["invalid_ssl"])
-                if (results["gtmetrix"] != {}):
-                    results_arr.append(results["gtmetrix"]["pagespeed_score"])
-                    results_arr.append(results["gtmetrix"]["yslow_score"])
-                    results_arr.append(results["gtmetrix"]["fully_loaded_time"])
-                print(results_arr)
-                tabulate(file_name,results_arr)
-            except Exception as e:
-                print("error in {}page: {}".format(e,l))
+        for word in words:
+            ls = search_links(word, results_number)
+            print("Searching complete. Checking for conditions.")
+            for l in ls:
+                try:
+                    results = check(l)
+                    # print(results)
+                    results_arr = []
+                    results_arr.append(results["link"])
+                    results_arr.append(results["is_wp"])
+                    results_arr.append(results["invalid_ssl"])
+                    if (results["gtmetrix"] != {}):
+                        results_arr.append(results["gtmetrix"]["pagespeed_score"])
+                        results_arr.append(results["gtmetrix"]["yslow_score"])
+                        results_arr.append(results["gtmetrix"]["fully_loaded_time"])
+                    print(results_arr)
+                    tabulate(file_name,results_arr)
+                except Exception as e:
+                    print("error in {}page: {}".format(e,l))
     elif ch == 2:
         trade = input("Enter the type of business you want to search from werkenntdenbesten: ")
         # page_start = input("Enter the page number you want to start searching from: (Press enter if you don't know what to enter)")
