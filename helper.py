@@ -86,6 +86,8 @@ def get_gtmetrix(url):
         try:
             results = requests.get(res_url, auth=HTTPBasicAuth(username, password))
             results_json = results.json()["results"]
+            if (results.json()["state"] == 'error'):
+                break
             imp["pagespeed_score"] = results_json["pagespeed_score"]
             imp["yslow_score"] = results_json["yslow_score"]
             imp["fully_loaded_time"] = results_json["fully_loaded_time"]
