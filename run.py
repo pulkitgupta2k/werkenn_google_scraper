@@ -23,7 +23,7 @@ if __name__ == "__main__":
             for l in ls:
                 try:
                     results = check(l)
-                    # print(results)
+                    print(results)
                     results_arr = []
                     results_arr.append(results["link"])
                     results_arr.append(results["is_wp"])
@@ -32,7 +32,7 @@ if __name__ == "__main__":
                         results_arr.append(results["gtmetrix"]["pagespeed_score"])
                         results_arr.append(results["gtmetrix"]["yslow_score"])
                         results_arr.append(results["gtmetrix"]["fully_loaded_time"])
-                    print(results_arr)
+                    # print(results_arr)
                     if(results["is_wp"]):
                         tabulate(file_name,results_arr)
                 except Exception as e:
@@ -72,7 +72,8 @@ if __name__ == "__main__":
                     results_arr.append(results["gtmetrix"]["yslow_score"])
                     results_arr.append(results["gtmetrix"]["fully_loaded_time"])
                 # print(results_arr)
-                tabulate(file_name,results_arr)
+                if(results["is_wp"]):
+                        tabulate(file_name,results_arr)
             except Exception as e:
                 print("error in {} page: {}".format(e,l))
     else:
