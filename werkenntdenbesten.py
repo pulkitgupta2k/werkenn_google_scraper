@@ -54,10 +54,9 @@ def search_all_trade(trade,page_start, page_end):
             page_hash = links_hash["hash"]
             for link in links_hash["links"]:
                 try: 
-                    link = find_url(link)
-                    link = link
-                    links.append(link)
-                    print(link)
+                    strp_link = find_url(link).replace("&quot","")
+                    links.append(link_strp)
+                    print(strp_link)
                 except:
                     pass
             print(page)

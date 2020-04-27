@@ -40,7 +40,10 @@ def getHTML(url):
     # url = str(url)[2:-1]
     try:
         req = requests.get(url, headers=headers, verify=True)
-        html = req.content.decode('utf-8')
+        try:
+            html = req.content.decode('utf-8')
+        except:
+            html = str(req.content)[2:-1]
         res = []
         res.append(html)
         res.append(False)
