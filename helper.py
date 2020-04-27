@@ -63,14 +63,25 @@ def getHTML(url):
 
 
 def get_gtmetrix(url):
+    imp = {}
     username = gtmatrix_api['username']
     password = gtmatrix_api['password']
     gt_url = "https://gtmetrix.com/api/0.1/test"
     payload = {'url': url, 'x-metrix-adblock': '0'}
     response = requests.request("POST", gt_url, auth=HTTPBasicAuth(username, password) , data = payload)
     response_json = response.json()
-    res_url = response_json['poll_state_url']
-    imp = {}
+    try:
+        res_url = response_json['poll_state_url']
+    except Exception as e:
+        # print(e)
+        print("####################################################")
+        print("#####  gtmatrix API maybe expired or not added #####")
+        print("####################################################")
+        imp["pagespeed_score"] = ""
+        imp["yslow_score"] = ""
+        imp["fully_loaded_time"] = ""
+        return imp
+    
     while True:
         try:
             results = requests.get(res_url, auth=HTTPBasicAuth(username, password))

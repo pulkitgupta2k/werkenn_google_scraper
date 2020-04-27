@@ -11,7 +11,7 @@ if __name__ == "__main__":
     print("2) Find websites from werkenntdenbesten: ")
     ch = int(input())
     if ch == 1:
-        words = input("Enter the keyword you want to search:  (For multiple keywords separate them by commas)")
+        words = input("Enter the keyword you want to search:  (For multiple keywords separate them by commas)  ")
         words = words.split(",")
         results_number = input("Enter the number of results you want:  ")
         file_name = input("Enter the name of the file you want to save results as:  ")
@@ -34,10 +34,8 @@ if __name__ == "__main__":
                         results_arr.append(results["gtmetrix"]["fully_loaded_time"])
                     print(results_arr)
                     tabulate(file_name,results_arr)
-                except KeyError:
-                    print("#####  gtmatrix API expired or not added #####")
                 except Exception as e:
-                    print("error in {}page: {}".format(e,l))
+                    print("error in {} page: {}".format(e,l))
     elif ch == 2:
         trade = input("Enter the type of business you want to search from werkenntdenbesten: ")
         # page_start = input("Enter the page number you want to start searching from: (Press enter if you don't know what to enter)")
@@ -74,9 +72,7 @@ if __name__ == "__main__":
                     results_arr.append(results["gtmetrix"]["fully_loaded_time"])
                 # print(results_arr)
                 tabulate(file_name,results_arr)
-            except KeyError:
-                print("#####  gtmatrix API expired or not added #####")
             except Exception as e:
-                print("error {} in page: {}".format(e,business_link))
+                print("error in {} page: {}".format(e,l))
     else:
         print("ex")

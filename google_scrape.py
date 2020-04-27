@@ -6,9 +6,9 @@ def search_links(term, results_number):
     results = []
     # ps=[]
     term = term.replace(" ","+")
-    print(term)
+    # print(term)
     url = "https://www.google.com/search?q={}".format(term)
-    print(url)
+    # print(url)
     ctr = 0
     while (ctr<int(results_number)):
         try:
