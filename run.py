@@ -34,6 +34,8 @@ if __name__ == "__main__":
                         results_arr.append(results["gtmetrix"]["fully_loaded_time"])
                     print(results_arr)
                     tabulate(file_name,results_arr)
+                except KeyError:
+                    print("#####  gtmatrix API expired or not added #####")
                 except Exception as e:
                     print("error in {}page: {}".format(e,l))
     elif ch == 2:
@@ -72,6 +74,8 @@ if __name__ == "__main__":
                     results_arr.append(results["gtmetrix"]["fully_loaded_time"])
                 # print(results_arr)
                 tabulate(file_name,results_arr)
+            except KeyError:
+                print("#####  gtmatrix API expired or not added #####")
             except Exception as e:
                 print("error {} in page: {}".format(e,business_link))
     else:
