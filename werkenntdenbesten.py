@@ -4,8 +4,13 @@ import json
 import requests
 import time
 import csv
+import re
 
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
+
+def find_url(string):
+    url = re.search("(?P<url>https?://[^\s]+)", string).group("url")
+    return url 
 
 def list_cat(link): #returns the category links
     l = {}
@@ -48,8 +53,13 @@ def search_all_trade(trade,page_start, page_end):
             time.sleep(1)
             page_hash = links_hash["hash"]
             for link in links_hash["links"]:
-                links.append(link)
-                print(link)
+                try: 
+                    link = find_url(link)
+                    link = link
+                    links.append(link)
+                    print(link)
+                except:
+                    pass
             print(page)
             page = page + 1
     except Exception as e:

@@ -21,18 +21,19 @@ if __name__ == "__main__":
         for l in ls:
             try:
                 results = check(l)
+                # print(results)
                 results_arr = []
                 results_arr.append(results["link"])
                 results_arr.append(results["is_wp"])
                 results_arr.append(results["invalid_ssl"])
                 if (results["gtmetrix"] != {}):
-                    results_arr.append(results["gtmetrix"][["pagespeed_score"]])
-                    results_arr.append(results["gtmetrix"][["yslow_score"]])
-                    results_arr.append(results["gtmetrix"][["fully_loaded_time"]])
+                    results_arr.append(results["gtmetrix"]["pagespeed_score"])
+                    results_arr.append(results["gtmetrix"]["yslow_score"])
+                    results_arr.append(results["gtmetrix"]["fully_loaded_time"])
                 print(results_arr)
                 tabulate(file_name,results_arr)
-            except:
-                print("error in page: {}".format(l))
+            except Exception as e:
+                print("error in {}page: {}".format(e,l))
     elif ch == 2:
         trade = input("Enter the type of business you want to search from werkenntdenbesten: ")
         # page_start = input("Enter the page number you want to start searching from: (Press enter if you don't know what to enter)")
@@ -56,17 +57,18 @@ if __name__ == "__main__":
         for business_link in business_links:
             try:
                 results = check(business_link)
+                print(results)
                 results_arr = []
                 results_arr.append(results["link"])
                 results_arr.append(results["is_wp"])
                 results_arr.append(results["invalid_ssl"])
                 if (results["gtmetrix"] != {}):
-                    results_arr.append(results["gtmetrix"][["pagespeed_score"]])
-                    results_arr.append(results["gtmetrix"][["yslow_score"]])
-                    results_arr.append(results["gtmetrix"][["fully_loaded_time"]])
+                    results_arr.append(results["gtmetrix"]["pagespeed_score"])
+                    results_arr.append(results["gtmetrix"]["yslow_score"])
+                    results_arr.append(results["gtmetrix"]["fully_loaded_time"])
                 print(results_arr)
                 tabulate(file_name,results_arr)
-            except:
-                print("error in page: {}".format(business_link))
+            except Exception as e:
+                print("error e in page: {}".format(business_link))
     else:
         print("ex")
