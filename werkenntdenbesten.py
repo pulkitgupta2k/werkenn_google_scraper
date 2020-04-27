@@ -73,7 +73,8 @@ def get_website(url):
     html = requests.get(url, headers = headers).text
     soup = BeautifulSoup(html,'html.parser')
     website = soup.find("icon-list")
-    website = str(website).split(",")[1][7:-1].replace("\\","")
+    website = str(website).split(",")[1][7:-1].replace("\\/","/")
     website = find_url(website).replace("&quot","")
+    website.replace("\\u00e4","ä").replace("\\u00df","ß").replace("\\u00f6","ö").replace("\\00fc","ü").replace("\\00c4","Ä").replace("\\00d6","Ö").replace("\\00dc","Ü")
     print(website)
     return(website)
