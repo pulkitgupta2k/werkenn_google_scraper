@@ -9,7 +9,10 @@ import re
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
 
 def find_url(string):
-    url = re.search("(?P<url>https?://[^\s]+)", string).group("url")
+    try:
+        url = re.search("(?P<url>https?://[^\s]+)", string).group("url")
+    except:
+        return ""
     return url 
 
 def list_cat(link): #returns the category links
@@ -54,9 +57,9 @@ def search_all_trade(trade,page_start, page_end):
             page_hash = links_hash["hash"]
             for link in links_hash["links"]:
                 try: 
-                    strp_link = find_url(link).replace("&quot","")
-                    links.append(link_strp)
-                    print(strp_link)
+                    link = find_url(link)
+                    links.append(link)
+                    print(link)
                 except:
                     pass
             print(page)
@@ -71,5 +74,6 @@ def get_website(url):
     soup = BeautifulSoup(html,'html.parser')
     website = soup.find("icon-list")
     website = str(website).split(",")[1][7:-1].replace("\\","")
+    website = find_url(website).replace("&quot","")
     print(website)
     return(website)
