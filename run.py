@@ -55,7 +55,10 @@ if __name__ == "__main__":
         print("Searching for websites...")
         business_links = []
         for link in links:
-            l = get_website(link)
+            try:
+                l = get_website(link)
+            except:
+                l = ""
             if l:
                 business_links.append(l)
         print("Searching complete. Checking for conditions.")

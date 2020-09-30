@@ -72,9 +72,16 @@ def search_all_trade(trade,page_start, page_end):
 def get_website(url):
     html = requests.get(url, headers = headers).text
     soup = BeautifulSoup(html,'html.parser')
-    website = soup.find("icon-list")
-    website = str(website).split(",")[1][7:-1].replace("\\/","/")
-    website = find_url(website).replace("&quot","")
-    website = website.replace("\\u00e4","ä").replace("\\u00df","ß").replace("\\u00f6","ö").replace("\\00fc","ü").replace("\\00c4","Ä").replace("\\00d6","Ö").replace("\\00dc","Ü")
-    print(website)
-    return(website)
+    
+    websites = soup.find("icon-list")[':items']
+    websites = json.loads(websites)
+    for w in websites:
+        if 'url' in w:
+            if w['url'].startswith('http'):
+                return w['url']
+    return ""
+
+
+# if __name__ == "__main__":
+#     # search_all_trade("trade", 1, 2)
+#     print(get_website("https://www.werkenntdenbesten.de/e/B28993034/vertrieb/berlin/nova-trade-deutschland-gmbh-bewertungen.html"))
